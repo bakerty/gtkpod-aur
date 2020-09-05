@@ -59,6 +59,6 @@ struct _PhotoEditorPluginClass {
     AnjutaPluginClass parent_class;
 };
 
-PhotoEditorPlugin *photo_editor_plugin;
+extern PhotoEditorPlugin *photo_editor_plugin;
 
 #endif /* PLUGIN_H_ */

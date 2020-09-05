@@ -44,6 +44,8 @@
 /* Parent class. Part of standard class definition */
 static gpointer parent_class;
 
+CorePrefsPlugin *core_prefs_plugin;
+
 static GtkActionEntry core_prefs_actions[] =
     {
 

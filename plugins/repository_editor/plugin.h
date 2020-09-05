@@ -51,6 +51,6 @@ struct _RepositoryEditorPluginClass {
     AnjutaPluginClass parent_class;
 };
 
-RepositoryEditorPlugin *repository_editor_plugin;
+extern RepositoryEditorPlugin *repository_editor_plugin;
 
 #endif /* PLUGIN_H_ */

@@ -50,6 +50,6 @@ struct _InfoDisplayPluginClass {
     AnjutaPluginClass parent_class;
 };
 
-InfoDisplayPlugin *info_display_plugin;
+extern InfoDisplayPlugin *info_display_plugin;
 
 #endif /* PLUGIN_H_ */

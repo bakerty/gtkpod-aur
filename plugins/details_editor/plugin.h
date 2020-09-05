@@ -52,6 +52,6 @@ struct _DetailsEditorPluginClass {
     AnjutaPluginClass parent_class;
 };
 
-DetailsEditorPlugin *details_editor_plugin;
+extern DetailsEditorPlugin *details_editor_plugin;
 
 #endif /* PLUGIN_H_ */

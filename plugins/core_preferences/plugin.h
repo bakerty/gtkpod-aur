@@ -61,6 +61,6 @@ struct _CorePrefsPluginClass {
     AnjutaPluginClass parent_class;
 };
 
-CorePrefsPlugin *core_prefs_plugin;
+extern CorePrefsPlugin *core_prefs_plugin;
 
 #endif /* PLUGIN_H_ */

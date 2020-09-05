@@ -41,6 +41,8 @@
 /* Parent class. Part of standard class definition */
 static gpointer parent_class;
 
+PhotoEditorPlugin *photo_editor_plugin;
+
 static GtkActionEntry photo_editor_actions[] =
     {
         {

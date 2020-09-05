@@ -37,6 +37,9 @@
 #include "context_menus.h"
 #include "prefs.h"
 
+GtkPodApp *gtkpod_app;
+guint gtkpod_app_signals[LAST_SIGNAL];
+
 static void gtkpod_app_base_init(GtkPodAppInterface* klass) {
     static gboolean initialized = FALSE;
 

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 # Script for syncing Palm addressbook data with iPod via Jppy
 # (c) 2005 Nick Piper <nick at nickpiper dot co dot uk>
 #

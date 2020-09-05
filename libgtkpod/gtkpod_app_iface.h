@@ -245,7 +245,7 @@ gboolean gtkpod_filetype_is_supported(gchar *name);
 FileType* gtkpod_get_filetype(gchar *name);
 GList *gtkpod_get_filetypes();
 
-GtkPodApp *gtkpod_app;
-guint gtkpod_app_signals[LAST_SIGNAL];
+extern GtkPodApp *gtkpod_app;
+extern guint gtkpod_app_signals[LAST_SIGNAL];
 
 #endif /* GTKPOD_APP_IFACE_H_ */

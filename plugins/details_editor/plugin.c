@@ -40,6 +40,8 @@
 /* Parent class. Part of standard class definition */
 static gpointer parent_class;
 
+DetailsEditorPlugin *details_editor_plugin;
+
 static GtkActionEntry details_editor_actions[] =
     {
         {

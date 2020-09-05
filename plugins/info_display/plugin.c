@@ -40,6 +40,8 @@
 /* Parent class. Part of standard class definition */
 static gpointer parent_class;
 
+InfoDisplayPlugin *info_display_plugin;
+
 static GtkActionEntry info_actions[] =
     {
         {
