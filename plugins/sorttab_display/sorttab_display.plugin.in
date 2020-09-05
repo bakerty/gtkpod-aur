@@ -1,0 +1,4 @@
+[Anjuta Plugin]
+Location=sorttab_display:SorttabDisplayPlugin
+_Name=Sorttab Display Plugin
+_Description=Filter Track View

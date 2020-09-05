@@ -1,0 +1,26 @@
+<!--*- xml -*-->
+<ui>
+	<menubar name="MenuMain">
+		<menu name="MenuMusic" action="ActionMenuMusic">
+			<placeholder name="PlaceholderMusicMenus">
+			</placeholder>
+			<placeholder name="PlaceholderFileMenus">
+				<menu name="Update Tracks from File" action="ActionUpdateMenu">
+					<menuitem name="Selected Tracks" action="ActionUpdateTracks" />
+                </menu>
+            </placeholder>
+        </menu>
+		<menu name="MenuEdit" action="ActionMenuEdit">
+			<placeholder name="PlaceholderEditMenus">
+				<menu name="Delete" action="ActionEditDeleteMenu">
+					<menuitem name="Selected Tracks from Playlist" action="ActionDeleteSelectedTracksFromPlaylist" />
+					<menuitem name="Selected Tracks from Database" action="ActionDeleteSelectedTracksFromDatabase" />
+					<menuitem name="Selected Tracks from Device" action="ActionDeleteSelectedTracksFromDevice" />
+					<separator name="separator2" />
+				</menu>
+            </placeholder>
+   		</menu>
+	</menubar>
+	<toolbar name="ToolbarMain">
+	</toolbar>
+</ui>

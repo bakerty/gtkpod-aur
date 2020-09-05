@@ -1,0 +1,20 @@
+<!--*- xml -*-->
+<ui>
+	<menubar name="MenuMain">
+		<menu name="MenuTools" action="ActionMenuTools">
+			<placeholder name="PlaceholderToolsMenus">
+				<separator/>
+				<menuitem name="Create iPod's Directories" action="ActionInitRepository" />
+				<menuitem name="Check iPod's Files" action="ActionCheckiPodFiles" />
+				<separator/>
+			</placeholder>
+   		</menu>
+   		<menu name="MenuEdit" action="ActionMenuEdit">
+			<placeholder name="PlaceholderEditMenus">
+				<menuitem name="Configure Repositories" action="ActionConfigRepositories"/>
+			</placeholder>
+		</menu>
+	</menubar>
+	<toolbar name="ToolbarMain">
+	</toolbar>
+</ui>

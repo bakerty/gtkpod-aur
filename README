@@ -1,0 +1,1154 @@
+iPod, iTunes, Mac, Macintosh, iBook are trademarks of Apple Computer,
+Inc., registered in the U.S. and other countries.
+
+
+
+Donations are welcome: please go to
+https://sourceforge.net/project/project_donations.php?group_id=67873
+for details.
+
+
+*----------------------------------*
+|                                  |
+|            Contents              |
+|                                  |
+*----------------------------------*
+
+
+  - Using gtkpod
+  - Features
+     - Tracks
+     - Filter Tabs
+     - Playlists
+     - Photos
+     - Drag and Drop
+     - Duplicate Detection
+     - Preferences File
+     - Startup and Shutdown scripts
+     - Load iPod and eject iPod scripts
+     - Extended Information File
+     - Refresh (Update) Track Info From File
+     - Synchronize Directories
+     - Volume Normalization
+     - Podcasts
+     - Export of Tracks (Copy from iPod)
+     - Encoding of ID3 tags (charsets)
+     - Extracting tag information from the filename
+     - Checking iPod's files
+     - Restoring your iPod after file system error
+     - Playcounts & Rating
+     - About filenames
+  - Icons for window managers
+  - Connecting iPod to a Linux box:
+  - Sick of loading the sbp2 modules by hand? (an example of how to
+    use startup/shutdown scripts)
+
+*----------------------------------*
+|                                  |
+|          Using gtkpod            |
+|                                  |
+*----------------------------------*
+
+
+1) If your iPod is not mounted automatically when connecting it to
+   your computer follow steps 1-7 in the "Connecting your iPod to a
+   Linux box" (basically you need to get the iPod partition mounted to
+   /media/ipod).  In most cases this should not be necessary any more
+   these days.
+
+2) If you are using GNOME, starting with V1.0 of gtkpod your iPod will
+   be automatically loaded and displayed within gtkpod once you
+   connect it to your box. Otherwise:
+
+   - Use "Load iPods" to import the contents of your old iTunesDB (you
+     may have to specify the correct mountpoint: right-button click on
+     the "iPod" repository, select "Edit iPod's Properties" and change
+     the mountpoint).
+
+3) Use "Add Files", "Add Directories" or DND to add files or
+   directories.
+
+4) Use "Eject iPod" in the context menu or click on the icon to the
+   left of the iPod name to write the added files to the iPod and
+   create a new iTunesDB and unload the iPod from gtkpod.
+
+5) Unmount your iPod. The easiest way is to use the windowmanager. If
+   this is not an option for you continue with step 8-11 of the
+   "Connecting your iPod to a Linux box" section (basically describing
+   how to unmount and disconnect your iPod).
+
+   You can automate the unmounting by adding creating a
+   ~/.gtkpod/gtkpod.eject file with the following line in it (without
+   the quotation marks): "eject $1"
+
+
+*----------------------------------*
+|                                  |
+|            Features              |
+|                                  |
+*----------------------------------*
+
+Tracks
+-----
+
+- You can add individual tracks, entire directories recursively, or
+  existing playlists using "Add Files". A file selection dialogue will
+  appear. By default existing tracks (same full filename) will be skipped.
+- You can add directories recursively using "Add Dirs". A directory
+  selection dialogue will appear.
+- You can add existing playlists using "Add Playlists"
+- You can delete tracks by marking them and pressing the "Ctrl-d" . If
+  you delete tracks from the master playlist (the topmost playlist,
+  called "gtkpod" by default).  You can also delete tracks by selecting them,
+  and using "Delete Track" in the Edit menu or from the context menu.
+- You can update ID3 tags of selected tracks in gtkpod from the mp3
+  file by pressing "Ctrl-u" or choose "Update track info from file" in
+  the Edit menu or from the context menu.
+- You can rename ID3 tags by editing the fields in gtkpod. You can
+  change an entire group of ID3 tags by editing an entry in the sort
+  tab (or mark several tracks and edit the first).
+- You can specify which tags to display in the preferences window
+- You can specify (in the prefs window) if the ID3 tags of the
+  corresponding mp3 file(s) should also be updated
+
+
+Filter Tabs
+-----------
+
+- The two notebooks above the track display are called "Filter Tabs"
+- They allow you to filter which tracks to display
+- If you edit an entry in the filter tab, the corresponding entry in all
+  associated tracks will be updated as well. When writing the tags to
+  disk as well, updating of a large number of tracks may take a while
+
+
+Playlists
+---------
+
+- You can create playlists with "New Playlist" or pressing "Ctrl-n" in
+  the playlist listview.
+- You can also create playlists by adding an existing playlist file
+  with "Add file" or "Add playlist".
+- You can add tracks to playlists by marking the tracks you want to add,
+  and then dragging them onto the playlist.
+- You can rename playlists.
+- You can delete playlists by selecting the desired playlist and pressing
+  "Ctrl-D", or by selecting "Delete Playlist" from the Edit menu.
+
+
+Photos
+------
+
+If your ipod supports photos then a special dynamic playlist is created in
+the playlist tree. YOU CANNOT DELETE IT! Indeed when clicking on it all the
+usual track related ipod functions are disabled or removed.
+
+Instead, the track window elements are replaced with the photo management pane.
+This displays the Photo Library and all the saved photos from the ipod and
+allows you to add new albums, add new images, remove albums, remove images and
+drag n drop images between albums.
+
+You cannot delete the Photo Library as this is the original photo database. All
+images are stored in it and thus clicking on it, all the images on the ipod are
+displayed in it. Subsequent albums display a subset of the Photo Library's images.
+
+Removing an image from an album will remove it from the album but it will still
+be stored on the ipod in the Photo Library.
+
+Removing an image from the Photo Library will delete it completely from the ipod.
+
+You can select a set of images from a selected album (inc. the Photo Library) and
+drag n drop them into another album.
+
+Any changes made in the photo management window will change the Photo playlist to
+italics indicating that a "Save Changes" should occur before exiting in order to
+preserve those changes.
+
+
+Drag and Drop
+-------------
+
+Drag and Drop can be used in several ways:
+
+1) gtkpod internal
+
+- Playlists, entries of a filter tab, and tracks can be dragged.
+
+- A drop _onto_ an existing playlist will add the tracks to that
+  playlist
+
+- A drop _between_ two existing playlists or behind the last playlist
+  will create a new playlist to which the tracks are added.
+
+- The default action for the drop is either move or copy as appears
+  appropriate (e.g. playlists are moved within a database ('local' or
+  'iPod/Shuffle'), but copied when dragged across different
+  databases).  The applicable action is displayed within the drag
+  icon and can be changed by pressing the control key during the drop. 
+
+2) between external file browser and gtkpod
+
+- Tracks, directories or playlist files can be dropped onto the
+  playlist view or track view. Drops between two existing playlists
+  create a new playlist.
+
+3) between external web browser and gtkpod
+
+- jpg files can be displayed in a web browser (eg. firefox, konqueror)
+  and dragged onto the coverart display or the image in the Edit Details
+  window. This will download the jpg to the album's directory then apply
+  it to the album's tracks. In the case of Edit Details, the jpg will
+  only be applied to the selected tracks (or only the one track if the
+  "Change all tracks simultaneously" is deselected).
+  
+Preferences File
+----------------
+
+On startup gtkpod will read the preferences from ~/.gtkpod/prefs (or
+/etc/gtkpod/prefs if the former doesn't exist).
+
+
+Startup and Shutdown Scripts
+----------------------------
+
+After reading the preferences file gtkpod will try to execute
+~/.gtkpod/gtkpod.in (or /etc/gtkpod/gtkpod.in if the former doesn't
+exist) during startup.
+
+Just before exiting the program, gtkpod will try to execute
+~/.gtkpod/gtkpod.out (or /etc/gtkpod/gtkpod.out if the former doesn't
+exist).
+
+Please see the section "Sick of loading the sbp2 modules by hand?" for
+an example of how to use this functionality.
+
+
+
+Load iPod and eject iPod scripts
+--------------------------------
+
+Before loading the contents of an iPod, gtkpod will call
+~/.gtkpod/gtkpod.load with the iPod's mountpoint as the only
+command line argument. Put any commands here needed to access the
+iPod, for example if you need to mount the iPod manually.
+
+When ejecting an iPod, gtkpod will call ~/.gtkpod/gtkpod.eject
+with the iPod's mountpoint as the only command line argument. Put
+any commands here you want to execute after gtkpod has written the
+changes to the iPod. One major candidate will probably be 
+
+sudo eject $1
+
+gtkpod will not attempt to do any magic of it's own to
+mount/unmount/eject the iPod.
+
+
+
+Duplicate Detection
+-------------------
+
+You can instruct gtkpod (in the prefs window) to use
+file-size-dependent SHA1 checksums to prevent the same file from
+being copied to your iPod twice.
+
+If a duplicate is detected, gtkpod will print out the filenames
+of the duplicate files. If the filename of the already existing file
+is not available (it is not stored in the iTunes database, see
+"Extended Information File" below), other available information of
+the track is printed.
+
+
+Extended Information File
+-------------------------
+
+Some (I believe) essential information is not stored in Apple's iTunes
+database. You can therefore instruct gtkpod to write an additional
+file (iTunesDB.ext) with extended information. For each track it stores
+
+  - SHA1 hash
+  - filename in the locale's encoding
+  - filename in UTF8 encoding
+  - hostname where the file was added (not used for anything yet)
+  - filename of an associated converted file (for example an .mp3 for
+    a .flac file)
+  - if the file is present in the local database a reference to there
+    in order for playcounts to work on the local database as well
+  - last modification time
+  - the charset used for the file when adding it
+
+Since the extended information file is only valid with the
+corresponding standard iTunes database, a checksum of the iTunes
+database is also stored in the extended information file.
+
+Using an extended information file will considerably speed up the
+import of an existing iTunes database when using duplicate detection,
+since the SHA1 checksums do not have to be re-calculated.
+
+Using an extended information file will also allow modification of ID3
+tags in the track files after the initial import, because the full
+filenames are still available.
+
+
+Refresh (Update) Track Info From File
+------------------------------------
+
+If you have changed the ID3 tags of your original file, you can update
+the ID3 tags stored in gtkpod without removing and re-adding the
+track. Simply select the track to be updated and press "Ctrl-u" or
+choose "Update Track Info From File" from the Edit menu. Since gtkpod
+needs to know the filename of the track, the "Extended Information
+File" (see above) is needed.
+
+"Update" will also re-read the replay-gain tags from disk, if
+available, and set the soundcheck field. If no replay-gain tag is
+available, the soundcheck field will be erased.
+
+You can also select entries in the filter tab or entire playlists for
+refresh.
+
+
+Synchronize with Directories
+----------------------------
+
+If you have added files to directories or changed files in directories
+you have previously added tracks from, you can use the "Synchronize
+Dirs" utility to update your iTunesDB.
+
+"Synchronize with Dir(s)" will use the selected tracks to make a list
+of directories to update, so you should activate the "Write Extended
+Information" option in the export section of the preferences dialogue.
+
+It will then add all non-existing tracks in those directories and
+update (see "Refresh") all existing tracks. The tracks are also added to
+the currently selected playlist, if they aren't already a member.
+
+Tracks that have been removed from the directory will only be removed
+from the iTunesDB if this option is checked in the options dialogue.
+
+For best results you should also activate duplicate detection. This
+avoids unnecessary copying of unchanged tracks.
+
+
+
+Volume Normalization
+--------------------
+
+There are two fields in the iTunesDB that allow to adjust the volume
+of an individual track: the volume field (a signed integer) and the
+soundcheck field (in dB). The volume is always active, whereas the
+soundcheck field is only active when you select 'soundcheck' on the
+iPod. Further, the soundcheck field only affects the earphone output
+but not the line output of the iPod.
+
+gtkpod will set the soundcheck according to the replay-gain tag set in
+your mp3 file. Newer versions of 'lame' automatically include the
+replay-gain tag when encoding. In that case the soundcheck field will
+be filled in when you first import a track.
+
+If no replay-gain tag is set, you can use the function 'Normalize
+Volume' to call mp3gain (mp3gain.sourceforge.net) to calculate the
+gain and write a replay-gain tag. Since this procedure is very time
+consuming, it is not done automatically during import. You need to
+install mp3gain in the default path or set the full path in the
+'Tools' section of the preferences dialog. If the iPod is connected,
+the tag is written to the file stored on the iPod.
+
+At this time "album gain" functionality is not supported. "Album gain"
+means that the volume of all tracks of one album is adjusted by the
+same gain, such that the relative volume level remains the same. It is
+planned to realize this in one of the next versions.
+
+Also, please be aware that tracks are not normalized on a 'per
+playlist' fashion. If a track is normalized, it's normalized in all
+playlists it is a member of.
+
+Once the replay-gain tag has been read, it is stored in the extended
+information file 'iTunesDB.ext'. When you call 'Normalize volume'
+again, the stored value will be used to re-populate the soundcheck
+field. Use 'Update Track' to re-read the tag from the file.
+
+
+Podcasts
+--------
+
+You have to download podcasts using a third party tool like bashpodder
+(http://linc.homeunix.org:8080/scripts/bashpodder/) or gpodder
+(http://perli.net/projekte/gpodder/)
+
+Podcasts should be added directly into the 'Podcasts' playlist of the
+iPod repository, for example by selecting the Podcasts playlist before
+manually adding files/directories. Podcasts will then appear only in
+the Podcasts section on the iPod.
+
+If you add podcasts to the main playlist 'gtkpod/iPod' or any other
+iPod playlist first and then drag them over to the Podcasts playlist,
+the podcasts will appear in the Podcasts section on the iPod, as well
+as in the normal music section.
+
+The podcast 'repository' is a local repository (like 'Local') where
+you can keep all local podcasts. No mechanism exists to automatically
+synchronize the iPod repository with the Podcast repository at this
+time. You have to drag the podcasts over manually.
+
+
+Export of Tracks (Copy from iPod)
+---------------------------------
+
+- Mark the tracks you want to export and select "Export Tracks from
+  Database" from the file menu (or use the context sensitive menu).
+- A file selection dialog window appears and you can choose the directory
+  you'd like the selected files to be written to.
+- You can specify the output filename in the prefs dialog by
+  specifying a template (e.g. "%A/%a - %t"). You can specify multiple
+  templates for different file formats by separating them by a
+  semicolon (e.g. "%A/%a - %t.mp3;%t.wav"). See the tooltip in the
+  prefs dialog for a list of identifiers.
+
+
+Encoding of ID3 tags (charsets)
+-------------------------------
+If you use correctly written unicode ID3V2 tags you don't have to
+worry about the charset setting.
+
+Otherwise you must specify the charset to be used for representing ID3
+tags in the preferences menu. The default is "System Charset", which
+is the charset associated with the locale gtkpod is running under. If
+your tags are stored in a different encoding, you should set it
+appropriately.
+
+Please note that if necessary you can change the charset each time you
+add files or directories: the iTunesDB itself is using UTF16, so once
+tags are imported correctly, changing the charset has no influence.
+
+If you chose "Japanese (automatic detection)", gtkpod will try to
+determine if the string is in ISO-2022-JP, Shift_JIS, or EUC-JP
+(Hankaku Katakana (1-byte Katakana) may not be recognized correctly --
+specify the correct encoding if you run into this problem). The actual
+encoding used for the ID tags will be stored and will be used when
+writing tags or doing updates/syncs. Check the "Use selected charset
+also when updating or syncing tracks" and "Use selected charset when
+writing tags" options if you want to specify a particular character
+set when writing or updating/syncing. The default charset is "EUC-JP"
+-- it will be used when the charset cannot be autodetected, as well as
+when writing tags if a specific charset could not be determined
+before.
+
+gtkpod will recognize ID3V2 tags encoded in unicode automatically and
+ignore your charset setting when necessary.
+
+
+Extracting tag information from the filename
+--------------------------------------------
+Tags can also be extracted from the filename if you activate the
+option 'Use this template to parse filename for tag information' and
+supply a template that explains how the filenames are constructed.
+
+For filenames like 
+    music/new/latin1/alan_jackson - drive/01 drive_for_daddy_gene.mp3
+you could use
+    %a - %A/%T %*.mp3
+
+to extract artist, album, track number and title.
+
+The following character sequences are supported:
+
+    %t: title
+    %a: artist
+    %A: album
+    %c: composer
+    %t: title
+    %g: genre
+    %T: track number
+    %C: CD number
+    %*: placeholder, ignore data
+    %%: the character '%'
+
+You cannot supply a template like "%a%t.mp3" because gtkpod would not
+know how to separate artist and title. "%a_%t.mp3" would be correct,
+if artist and title are separated by an underscore.
+
+You can also omit the trailing ".mp3" if you want the template to
+apply to all files instead of only to mp3 files.
+
+
+Checking iPod's Files
+---------------------
+For whatever reason -- it may happen that tracks are present in your
+iTunesDB that are no longer present on the iPod (dangling tracks), or
+that tracks are on the iPod but not in the iTunesDB (orphaned
+tracks).
+
+The function "Checking iPod's Files" under the "File" menu will
+identify both types and take the following actions:
+
+Orphaned tracks:
+A new playlist "[Orphaned]" will be created with all orphaned tracks
+in it. The only exception are orphaned tracks that would become
+duplicates (if duplicate detection is activated). Those are marked for
+deletion with the next sync.
+
+Dangling tracks:
+These tracks will be marked for deletion with the next sync unless the
+original PC file is still available. In that case you can have them
+restored with the next sync.
+
+
+Restoring your iPod after file system error
+-------------------------------------------
+If iPod's file system gets corrupted and you need to reformat your
+iPod, there is a way to restore the contents semi-automatically if you
+have been using the "write extended information file" (iTunesDB.ext)
+options:
+
+ - If the directory structure on the iPod doesn't exist yet,
+   load the iPod in gtkpod and have it created for you. Then unload
+   the iPod again.
+
+ - copy your backup files in .gtkpod/ (usually iTunesDB and
+   iTunesDB.ext) to your iPod (usually
+   <mountpoint>/iPod_Control/iTunes/
+   On the iPod the files must be named iTunesDB and iTunesDB.ext.
+
+ - load the iPod in gtkpod
+
+ - select the iPod repository and start "Check iPod's files" from the
+   File menu
+
+ - unload the iPod (or save changes)
+
+This should restore your iPod to what it was before, provided you
+didn't move or remove any of the original tracks on your harddrive, and
+the charset information was stored correctly.
+
+
+Playcounts & Rating
+-------------------
+
+Whenever you play a track completely on the iPod (firmware version 1.3
+or higher) a counter in the "Play Counts" file will be increased by
+one. The same file also contains the rating you can set with the 3rd
+generation iPods.
+
+This file appears to be deleted whenever the iPod resets itself --
+e.g. because you disconnect it from the computer. Therefore, be
+careful... Charging the iPod seems to do no harm.
+
+When gtkpod is started, it will also read this file and incorporate
+the information into the iTunesDB that can be written back to the
+iPod.
+
+There have been several requests to also register playcounts when
+playing a track on the local machine. This is possible by calling
+gtkpod as "gtkpod -p <filename>".
+
+If gtkpod is already running, the playcount of that track there will
+be increased by one. If gtkpod is not already running, the playcount
+will be registered in ~/.gtkpod/offline_playcount. This file will be
+read the next time you import the iTunesDB from your iPod, and the
+playcounts will be updated accordingly.
+
+Please note that if you start several instances of gtkpod, only the
+first instance will register playcounts through "gtkpod -p".
+
+Now all you have to do is tell your favorite player to call gtkpod
+with the filename of the played track.
+
+For xmms this is possible as of July 18th, 2004 (CVS
+version). Versions before that (including 1.2.10) only allow you to
+have an external program called at the beginning of a track. Our patch
+allows to have an external program called also at the end of a track.
+
+In each case you will need to activate the "General Plugin" called
+"song_change" and configure it to call 'gtkpod -p "%f"'.
+
+
+About filenames (excerpt from the GTK2 release notes):
+------------------------------------------------------
+* The assumption of GLib and GTK+ by default is that filenames on the
+  filesystem are encoded in UTF-8 rather than the encoding of the locale;
+  The GTK+ developers consider that having filenames whose interpretation
+  depends on the current locale is fundamentally a bad idea.
+
+  If you have filenames encoded in the encoding of your locale, then
+  you may want to set the G_BROKEN_FILENAMES environment variable:
+  
+   G_BROKEN_FILENAMES=1
+   export G_BROKEN_FILENAMES
+
+  Best integration of GTK+-2.0 with the environment is achieved by 
+  using a UTF-8 locale.
+
+------ end of excerpt
+
+It is my feeling that many people use filenames encoded in the
+encoding of the locale. The "Add directories" dialogue already takes
+care of this and assumes the filenames to be in the same encoding as
+you have specified for the ID3 tags (see above). You can therefore
+forget about the excerpt above.
+
+However, the "Add Files" and "Add Playlists" dialogue (at the moment)
+uses the standard GTK+-2.0 file selection dialogue. Therefore I have
+no access on the conversion functions used, and a warning is printed
+when filenames are encountered that are encoded in an encoding other
+than the one of the current locale. ID3 tags are still read correctly
+(according to the charset set in the preference dialogue).
+
+
+*--------------------------------------------------*
+|                                                  |
+|  Environment variables		           |
+|                                                  |
+*--------------------------------------------------*
+
+The following environment variables can be set if needed:
+
+IPOD_MOUNTPOINT: Defines the mountpoint of the iPod. This overwrites
+the value stored in the prefs, but is overwritten by the command line
+argument "-m" or "--mountpoint".
+
+GTKPOD_DF_COMMAND: Only used on systems without statvfs(). Defines the
+"df" command to be used for probing the free space on the iPod
+including command line arguments. Default is "df -k -P". On some
+systems it may be necessary to remove the "-P" option. The mount point
+is added to this command line automatically. You can switch off calls
+to df by setting this environment variable to an empty string.
+
+
+
+*--------------------------------------------------*
+|                                                  |
+|  Icons for window managers		           |
+|                                                  |
+*--------------------------------------------------*
+
+Should you require an icon for your window manager you can use those
+provided in $(datadir)/pixmaps (usually
+/usr/local/share/gtkpod/pixmaps or
+/usr/share/gtkpod/pixmaps).
+
+Currently the following files are available:
+
+  gtkpod-icon-32.png
+  gtkpod-icon-32x32.png
+  gtkpod-icon-32x32-2.png
+  gtkpod-icon-48.png
+  gtkpod-icon-48x48.png
+  gtkpod-icon-64x64.png
+
+
+*--------------------------------------------------*
+|                                                  |
+|  Connecting iPod to a Linux box	           |
+|  (kernel 2.6.6)                                  |
+|  (should also work with earlier 2.6 kernels)     |
+|                                                  |
+*--------------------------------------------------*
+
+This describes how to set up the iPod together with the automounter in
+kernel V2.6.6 (some minor changes in the kernel configuration may be
+necessary for older V2.6 versions).
+
+1) It appears to be possible to use HFS-formatted (Apple)
+   iPods. However, this short guide assumes you have a Windows
+   (VFAT) iPod. For conversion from HFS to VFAT please see 
+
+   http://www.blinkenlights.ch/gnupod/gnupod.html#SEC6
+
+2) I'm using the following kernel configuration options (I'm only
+   using FireWire -- so the USB options are just educated
+   guesses. Please let me know if it works).
+
+   I'm not using modules, simply because what's compiled in can't fail
+   loading.
+
+    * General Setup  -> Support for hot-pluggable devices - y
+    * Device Drivers -> SCSI device support - y
+    *                -> SCSI device support -> SCSI disk support - y
+    *                -> SCSI device support -> SCSI generic support - y
+For FireWire:
+    *                -> IEEE1394 (FireWire) support - y
+    *                -> IEEE1394 (FireWire) support -> OHCI-1394 support - y
+    *                -> IEEE1394 (FireWire) support -> SBP-2 support - y
+For USB:
+    *                -> USB support -> Support for Host-side USB - y
+    *                                       -> EHCI HCD support - y
+    *                                       -> OHCI HCD support - y
+    *                                       -> UHCI HCD support - y
+    *                                       -> USB Mass Storage support - y
+For USB and FireWire:
+    * Filesystems    -> DOS/FAT/NT Filesystems - y
+    *                -> DOS/FAT/NT Filesystems -> VFAT fs support - y
+    *                -> Kernel automounter version 4 support - y
+    *                -> Native Language Support
+    *                            -> Codepage 437 (CONFIG_NLS_CODEPAGE_437)
+    *                            -> NLS ISO 8859-1 (CONFIG_NLS_ISO8859_1) 
+
+
+
+(for iPods formatted with the HFS filesystem choose
+    * Filesystems -> Miscellaneous filesystems
+			   -> Apple Extended HFS filesystem support)
+
+At least for the new 4Gs and iPod minis you should _disable_
+(CONFIG_EFI_PARTITION, see Troubleshooting for more information):
+    * File Systems -> Partition Types -> Advanced Partition Selection
+		   -> EFI GUID Partition support
+
+3) You need to install the following external packages:
+
+   hotplug and udev (http://linux-hotplug.sourceforge.net/)
+   autofs (ftp.kernel.org:/pub/linux/daemons/autofs)
+
+   Most likely packages are available for your distribution.
+
+4) Write rules for udev (/etc/udev/udev.rules, add at the beginning)
+   to recognize your iPod automatically (mind the spaces within
+   "iPod...", and be aware that some distributions require a double
+   equal after the BUS keyword (BUS=="scsi"...)):
+
+BUS="scsi", SYSFS{model}="iPod            ", KERNEL="sd?2", NAME="%k", SYMLINK="ipod"
+
+   This will map /dev/sd?2 to /dev/ipod everytime you plug in your
+   iPod. That even works if you own more than one USB/Firewire device
+   that shows up as a harddisk, independent of the order in which you
+   connect the devices.
+
+   (You need to replace "sd?2" with "sd?1" (or maybe just "sd?") for
+   HFS formatted iPods.)
+
+   For more information on how to write udev rules please refer to
+   http://www.gamingclones.com/Howtos/udevrules.html. That document
+   gives an easy-to-understand introduction
+
+5) Set up autofs to automatically mount the iPod when you access it
+   and unmount it after 2 seconds of inactivity. In /etc/auto.master
+   add:
+
+/var/autofs/removable   /etc/auto.removable     --timeout=2,sync,nodev,nosuid,gid=autofs,umask=007
+
+   Adjust the gid,umask (and uid) values to whatever you need -- in this
+   example all users in the group "autofs" have read/write access, and
+   I have added all users that may access the iPod to the autofs group.
+
+   In /etc/auto.removable add
+
+ipod            -fstype=vfat            :/dev/ipod
+
+   (Obviously you need to change the filesystem type from 'vfat' to
+   'hfsplus' when you use an HFS formatted iPod.)
+
+   Then simply add a link from /media/ipod:
+
+   ln -s /var/autofs/removable/ipod /media/ipod
+
+
+Now your system is configured to mount the iPod every time you access
+/media/ipod and to unmount it again after two seconds of inactivity. You
+won't have to worry about doing mounting/unmouting yourself any more.
+
+
+
+*--------------------------------------------------*
+|                                                  |
+|  Connecting iPod to a Linux box (IEEE 1394)      |
+|  (kernel 2.4.21)                                 |
+|  (may also work with 2.4.20, but I didn't try)   |
+|  (instructions for 2.4.20 can be found below)    |
+|                                                  |
+*--------------------------------------------------*
+
+1) You need a Windows iPod. See e.g.
+
+http://www.blinkenlights.ch/gnupod/gnupod.html#SEC6
+
+for information about how to convert your mac iPod to a windows iPod.
+
+Alternatively, I have received a report that Alan Cox's patches
+(2.4.21-rc8-ac1, but 2.4.21-ac1 should work as well) include hfsplus
+support. That should allow you to use hfs formatted iPods. But beware:
+hfsplus support is still beta.
+
+2) Get kernel source and configure
+Needed configuration:
+
+    * Code maturity level options - y
+    * SCSI support - y
+    * SCSI disk support - y
+    * IEEE1394 (FireWire)/IEEE 1394 (FireWire) support (Experimental) - y
+    * OHCI-1394 support - y
+    * SBP-2 support - m (important to use module -- if someone finds
+      out how to use hotplug with sbp2 compiled in, let me know)
+      (With 2.6.1 compiling sbp2 in seems to work fine.)
+At least for the new 4Gs and iPod minis you should _disable_
+(CONFIG_EFI_PARTITION, see Troubleshooting for more information):
+    * File Systems -> Partition Types -> Advanced Partition Selection
+		   -> EFI GUID Partition support
+    *              -> Native Language Support
+    *                            -> Codepage 437 (CONFIG_NLS_CODEPAGE_437)
+    *                            -> NLS ISO 8859-1 (CONFIG_NLS_ISO8859_1) 
+
+
+3) Create /media/ipod:
+
+   mkdir /media/ipod
+
+4) Add a line to /etc/fstab. You should edit uid to match your user
+   id. Also, /dev/sda2 may not be appropriate, if you have other scsi
+   devices.
+
+/dev/sda2	/media/ipod	vfat rw,user,noauto,noatime,errors=remount 0 0
+
+   (For HFS this line should read
+
+/dev/sda  /media/ipod  hfsplus  rw,user,noauto,exec  0  0
+
+    please note that it's just '/dev/sda')
+
+
+NOTE: Some users have had problems with newer versions of mount (newer than
+mount-2.11h) The following fstab entry might work better for you.
+
+/dev/sda2	/media/ipod	vfat rw,user,noauto,noatime,shortname=winnt 0 0
+
+5) Install the hotplug utilities
+   (http://linux-hotplug.sourceforge.net/, debian package: 'hotplug')
+
+   (If you don't want to use the hotplug utilities, you must call the
+   rescan-scsi-bus.sh (see below) by hand after loading the sbp2
+   module. This is different from 2.4.20.)
+
+5a) Add the ieee1394 hotplug support (described at
+    http://www.linux1394.org/faq.html#hotplug):
+
+   - copy ieee1394.agent to /etc/hotplug/ from
+     http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/linux-hotplug/admin/etc/hotplug/
+   - mkdir /etc/hotplug/ieee1394
+   - create /etc/hotplug/ieee1394/sbp2:
+       #!/bin/bash
+       if [ "${ACTION}" = "add" ]; then
+	 . /etc/hotplug/ieee1394/rescan-scsi-bus.sh
+       else
+	 . /etc/hotplug/ieee1394/rescan-scsi-bus.sh -r
+       fi
+   - chmod +rx /etc/hotplug/ieee1394/sbp2
+   - copy rescan-scsi-bus.sh to /etc/hotplug/ieee1394 from
+     http://www.garloff.de/kurt/linux/rescan-scsi-bus.sh
+   - just to be sure: restart hotplug:
+	/etc/init.d/hotplug restart
+
+6) Connect your iPod to your computer and wait until you see something
+   like the following on your system log (you can use the 'dmesg'
+   command to check).
+
+Jun 15 17:13:53 hatarakibachi kernel: ieee1394: Node 00:1023 changed to 01:1023
+Jun 15 17:13:55 hatarakibachi kernel: ieee1394: Node 01:1023 changed to 00:1023
+Jun 15 17:13:57 hatarakibachi kernel: ieee1394: sbp2: Logged into SBP-2 device
+Jun 15 17:13:57 hatarakibachi kernel: ieee1394: Device added: Node[00:1023]  GUID[000a2700020680b5]  [Apple Computer, Inc.]
+Jun 15 17:13:57 hatarakibachi kernel: ieee1394: Node 00:1023 changed to 01:1023
+Jun 15 17:13:57 hatarakibachi kernel: scsi singledevice 0 0 0 0
+Jun 15 17:13:57 hatarakibachi kernel:   Vendor: Apple     Model: iPod              Rev: 1.30
+Jun 15 17:13:57 hatarakibachi kernel:   Type:   Direct-Access                      ANSI SCSI revision: 02
+Jun 15 17:13:57 hatarakibachi kernel: Attached scsi removable disk sda at scsi0, channel 0, id 0, lun 0
+Jun 15 17:13:57 hatarakibachi kernel: SCSI device sda: 39062520 512-byte hdwr sectors (20000 MB)
+Jun 15 17:13:57 hatarakibachi kernel: sda: test WP failed, assume Write Enabled
+Jun 15 17:13:58 hatarakibachi kernel:  sda: sda1 sda2
+Jun 15 17:13:58 hatarakibachi kernel: scsi singledevice 0 0 1 0
+...
+
+7) Mount the iPod hard drive
+
+   mount /media/ipod
+
+8) do whatever you need to do (e.g. start gtkpod, see below)
+
+9) Unmount the iPod:
+
+    umount /media/ipod
+
+10) Unload the module sbp2 (as most likely as root):
+
+    rmmod sbp2
+
+11) Disconnect the iPod from your computer (ignore the "Do not
+    disconnect" message -- as long as you wait for the 'unmount' to
+    command to finish properly, everything should be fine).
+
+
+
+*--------------------------------------------------*
+|                                                  |
+|  Connecting iPod to a Linux box using IEEE 1394  |
+|  (kernel 2.4.20)                                 |
+|  (connecting to 2.4.21 seems to work slightly    |
+|   differently -- see above)                      |
+|                                                  |
+*--------------------------------------------------*
+
+1) You need a Windows iPod. See e.g.
+
+http://www.blinkenlights.ch/gnupod/gnupod.html#SEC6
+
+for information about how to convert your mac iPod to a windows iPod.
+
+Alternatively, I have received a report that Alan Cox's patches
+(2.4.21-rc8-ac1, but 2.4.21-ac1 should work as well) include hfsplus
+support. That should allow you to use hfs formatted iPods. But beware:
+hfsplus support is still beta.
+
+2) Get kernel source and configure
+Needed configuration:
+
+    * Code maturity level options - y
+    * SCSI support - y
+    * SCSI disk support - m
+    * IEEE1394 (FireWire)/IEEE 1394 (FireWire) support (Experimental) - y
+    * OHCI-1394 support - y
+    * SBP-2 support - m
+At least for the new 4Gs and iPod minis you should _disable_
+(CONFIG_EFI_PARTITION, see Troubleshooting for more information):
+    * File Systems -> Partition Types -> Advanced Partition Selection
+    *	   	   -> EFI GUID Partition support
+    *              -> Native Language Support
+    *                          -> Codepage 437 (CONFIG_NLS_CODEPAGE_437)
+    *                          -> NLS ISO 8859-1 (CONFIG_NLS_ISO8859_1) 
+
+3) Create /media/ipod:
+
+   mkdir /media/ipod
+
+4) Add a line to /etc/fstab. You should edit uid to match your user
+   id. Also, /dev/sda2 may not be appropriate, if you have other scsi
+   devices.
+
+/dev/sda2	/media/ipod	vfat rw,user,noauto,noatime 0 0
+
+   (For HFS this line should read
+
+/dev/sda  /media/ipod  hfsplus  rw,user,noauto,exec  0  0
+
+    please note that it's just '/dev/sda')
+
+
+NOTE: Some users have had problems with newer versions of mount (newer than
+mount-2.11h) The following fstab entry might work better for you.
+
+/dev/sda2	/media/ipod	vfat rw,user,noauto,noatime,shortname=winnt 0 0
+
+NOTE: You can add ",umask=0" to the options to make the iPod
+readable/writable for all users.
+
+5) Connect your iPod to your computer and wait until you see something
+   like the following on your system log (you can use the 'dmesg'
+   command to check).
+
+Nov 28 21:58:06 hatarakibachi kernel: ieee1394: Node 00:1023 changed to 01:1023
+Nov 28 21:58:09 hatarakibachi kernel: ieee1394: Node 01:1023 changed to 00:1023
+Nov 28 21:58:12 hatarakibachi kernel: ieee1394: NodeMgr: hotplug policy returned -2
+Nov 28 21:58:12 hatarakibachi kernel: ieee1394: Device added: Node[00:1023]  GUID[000a2700020680b5]  [Apple Computer, Inc.]
+Nov 28 21:58:12 hatarakibachi kernel: ieee1394: Node 00:1023 changed to 01:1023
+
+6) Load the sbp2 module (most likely as root):
+
+   modprobe sbp2
+
+   You should see something like the following on your system log:
+
+Nov 28 21:58:38 hatarakibachi kernel: ieee1394: sbp2: Logged into SBP-2 device
+Nov 28 21:58:38 hatarakibachi kernel: scsi0 : IEEE-1394 SBP-2 protocol driver (host: ohci1394)
+Nov 28 21:58:38 hatarakibachi kernel: $Rev$ James Goodwin <jamesg@filanet.com>
+Nov 28 21:58:38 hatarakibachi kernel: SBP-2 module load options:
+Nov 28 21:58:38 hatarakibachi kernel: - Max speed supported: S400
+Nov 28 21:58:38 hatarakibachi kernel: - Max sectors per I/O supported: 255
+Nov 28 21:58:38 hatarakibachi kernel: - Max outstanding commands supported: 8
+Nov 28 21:58:38 hatarakibachi kernel: - Max outstanding commands per lun supported: 1
+Nov 28 21:58:38 hatarakibachi kernel: - Serialized I/O (debug): no
+Nov 28 21:58:38 hatarakibachi kernel: - Exclusive login: yes
+Nov 28 21:58:38 hatarakibachi kernel:   Vendor: Apple     Model: iPod              Rev: 1.21
+Nov 28 21:58:38 hatarakibachi kernel:   Type:   Direct-Access                      ANSI SCSI revision: 02
+Nov 28 21:58:38 hatarakibachi kernel: Attached scsi removable disk sda at scsi0, channel 0, id 0, lun 0
+Nov 28 21:58:38 hatarakibachi kernel: SCSI device sda: 39062520 512-byte hdwr sectors (20000 MB)
+Nov 28 21:58:38 hatarakibachi kernel: sda: test WP failed, assume Write Enabled
+Nov 28 21:58:39 hatarakibachi kernel:  sda: sda1 sda2
+
+7) Mount the iPod hard drive
+
+   mount /media/ipod
+
+8) do whatever you need to do (e.g. start gtkpod, see below)
+
+9) Unmount the iPod:
+
+    umount /media/ipod
+
+10) Unload the module sbp2 (as most likely as root):
+
+    rmmod sbp2
+
+11) Disconnect the iPod from your computer.
+
+
+*--------------------------------------------------*
+|                                                  |
+|  Connecting iPod to a Linux box (USB)            |
+|                                                  |
+*--------------------------------------------------*
+
+I don't have much information about this so far (I don't own a third
+generation iPod). Please help me to fill in the gaps.
+
+Stephen Drye sent me the following note:
+
+"I've figured out how to get a USB-connected iPod recognized...:
+
+The trick to it is that you have to 
+
+- plug the iPod in
+
+- it'll fail to be recognized by the SCSI subsystem
+
+- now, even though your ipod says not to, unplug the USB cord and
+  immediately plug it back in.
+
+- since the iPod's hdd was already spun up, the SCSI subsystem now
+  recognizes it and mounts it as /dev/sda
+
+- You can then mount /dev/sda2 to /media/ipod as normal."
+
+On the other hand: with my 4G iPod under 2.6.9 and 2.6.10 I never had
+any problem whatsoever getting the iPod to work. With IEEE it was
+awful (would work some times, would not some other time).
+
+
+*----------------------------------*
+|                                  |
+|     Sick of loading the sbp2     |
+|         modules by hand?         |
+|                                  |
+|         Corey Donohoe            |
+|     <atmos at atmos dot org>     |
+|         March 22nd 2003          |
+|                                  |
+*----------------------------------*
+
+Sick of loading the sbp2 modules by hand every time you want to use your
+ipod?  Are you sick of mounting it too?  Using sudo gtkpod can make manually
+interacting with the ipod filesystem a thing of the past.  Note that you
+should have your ipod working with gtkpod before attempting this automated
+method, see the README that came with gtkpod in order to get things up and
+running.
+
+Here's a brief example of how I'm using gtkpod now in 8 easy steps.
+
+(Remark: the hotplug facility of new kernels can also load and unload
+the sbp2 module for you.)
+
+/**********/
+ * Step 1 *
+/**********/
+Using sudo allow users to load/remove the sbp2 module
+Example /etc/sudoers
+------------------------------- Begin Here ---------------------------------
+
+# Cmnd alias specification
+Cmnd_Alias IPOD=/sbin/modprobe sbp2 sbp2_force_inquiry_hack=1, /sbin/rmmod sbp2
+# User privilege specification
+atmos   ALL=(ALL) ALL
+atmos   ALL= NOPASSWD : IPOD
+
+------------------------------- End Here -----------------------------------
+I use the force inquiry hack cause I have an older iPod, if you normally can
+get by with /sbin/modprobe sbp2 then ignore the inquiry hack stuff.  Note
+that explicitly specifying which module to probe/remove keeps the user from
+being able to add/remove arbitrary modules.  This allows us to keep gtkpod
+as a user process, and execute commands the user wouldn't usually have
+enough rights to.
+
+/**********/
+ * Step 2 *
+/**********/
+Add a line similar to the below to your /etc/fstab, this will enable users
+to mount the ipod with read/write capabilities.  Example line assumes your
+ipod mount point is /media/ipod and your ipod is detected as /dev/sda
+
+------------------------------- Begin Here ---------------------------------
+/dev/sda2       /media/ipod       vfat    rw,user,noauto          0       0
+------------------------------- End Here -----------------------------------
+
+
+/**********/
+ * Step 3 *
+/**********/
+Then setup your /etc/gtkpod/gtkpod.in file to load the module when gtkpod is
+started.
+Example /etc/gtkpod/gtkpod.in
+------------------------------- Begin Here ---------------------------------
+
+sudo /sbin/modprobe sbp2 sbp2_force_inquiry_hack=1
+
+------------------------------- End Here -----------------------------------
+
+/**********/
+ * Step 4 *
+/**********/
+
+Then setup your /etc/gtkpod/gtkpod.out file to unload the module when gtkpod
+is exited.
+Example /etc/gtkpod/gtkpod.out
+------------------------------- Begin Here ---------------------------------
+
+sudo /sbin/rmmod sbp2 
+
+------------------------------- End Here -----------------------------------
+
+/**********/
+ * Step 5 *
+/**********/
+Then enable ipod automounting in the gtkpod prefs(in the misc tab).
+
+/**********/
+ * Step 6 *
+/**********/
+You're now ready to use gtkpod in a much nicer fashion.  Start by
+plugging in your ipod.  You should get a check mark with "OK to disconnect"
+displayed on your ipod.
+
+/**********/
+ * Step 7 *
+/**********/
+Start gtkpod, your ipod should be accessible (i.e. autoimport should work)
+A "Do Not Disconnect" message is displayed on your ipod while gtkpod is
+running.
+
+/**********/
+ * Step 8 *
+/**********/
+After you exit gtkpod, the "OK to disconnect" message should be displayed
+again.  It's ok to unplug your ipod now.  
+
+Good Luck. 
+
+
+
+*----------------------------------*
+|                                  |
+|           Known bugs             |
+|                                  |
+*----------------------------------*
+
+
+- Display of large number of tracks is awfully slow (mainly because of
+  the use of the standard GTK2 tree views) -> deactivate "Automatically
+  select "All" in first filter tab" and/or deactivate "Automatically
+  select master playlist". You could also "block the display" to speed
+  up the display update. Further, decreasing the window size
+  considerably speeds up the display.
+
+  I also want to point out that updating the info window takes up a
+  considerable amount of time. Update may become more intelligent in
+  the future -- until then close the info window for more speed.
+
+- When changing selections in the filter tabs while importing the
+  iTunesDB, sometimes the interface freezes. I tried to track this
+  problem down but only found out that gtk+ does not return control
+  back to gtkpod. Selecting the "All" filter tabs seems to unfreeze the
+  interface again.

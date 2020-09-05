@@ -1,0 +1,56 @@
+<!--*- xml -*-->
+<ui>
+	<menubar name="MenuMain">
+		<menu name="MenuMusic" action="ActionMenuMusic">
+			<placeholder name="PlaceholderMusicMenus"/>
+			<separator/>
+			<placeholder name="PlaceholderFileMenus">
+				<menu name="Update Tracks from File" action="ActionUpdateMenu"/>
+			</placeholder>
+			<separator/>
+			<menuitem name="Quit" action="ActionExit" />
+		</menu>
+		<menu name="MenuEdit" action="ActionMenuEdit">
+			<placeholder name="PlaceholderEditMenus">
+				<menu name="Delete" action="ActionEditDeleteMenu" />
+			</placeholder>
+			<placeholder name="PlaceholderSelectMenus"/>
+			<placeholder name="PlaceholderInsertMenus"/>
+			<placeholder name="PlaceholderSearchMenus"/>
+			<placeholder name="PlaceholderOperationMenus"/>
+			<placeholder name="PlaceholderSettingsMenus">
+				<separator name="separator1" />
+				<menuitem name="Preferences" action="ActionEditPreferences" />
+			</placeholder>
+		</menu>
+		<menu name="MenuView" action="ActionMenuView">
+			<menuitem name="Fullscreen" action="ActionViewFullscreen"/>
+			<menuitem name="LockLayout" action="ActionViewLockLayout"/>
+			<menuitem name="ResetLayout" action="ActionViewResetLayout"/>
+			<separator name="separate1"/>
+		</menu>
+		<menu name="MenuTools" action="ActionMenuTools">
+			<placeholder name="PlaceholderToolsMenus">
+			</placeholder>
+		</menu>
+		<placeholder name="PlaceHolderHelpMenus" >
+			<menu name="MenuHelp" action="ActionMenuHelp" >
+				<placeholder name="PlaceHolderHelpDevel" >
+						<separator name="separator1" />
+						<menuitem name="UserManual" action="ActionHelpUserManual" />
+				</placeholder>
+				<placeholder name="PlaceHolderHelpWeb" >
+					<separator name="separator1" />
+					<menuitem name="GtkpodHome" action="ActionHelpGtkpodHome" />
+					<menuitem name="BugReport" action="ActionHelpBugReport" />
+					<menuitem name="Faq" action="ActionHelpFaq" />
+				</placeholder>
+				<placeholder name="PlaceHolderHelpAbout" >
+					<separator name="separator2" />
+					<menuitem name="AboutPlugins" action="ActionAboutPlugins" />
+					<menuitem name="AboutGtkpod" action="ActionAboutGtkpod" />
+				</placeholder>
+			</menu>
+		</placeholder>
+	</menubar>
+</ui>

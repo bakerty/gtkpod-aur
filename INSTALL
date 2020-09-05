@@ -1,0 +1,220 @@
+How to compile/install gtkpod:
+
+(For ubuntu/debian please refer to the end of this file for a quick round-up)
+
+1. First, make sure you have compiled and installed the dependencies.
+   Most Linux distros will include them, except maybe for libid3tag
+   (http://sourceforge.net/project/showfiles.php?group_id=12349).
+
+   Please do not confuse the libid3 library with the libid3tag
+   library -- they are not related. libid3tag is part of the MAD
+   project (http://sourceforge.net/projects/mad/).
+
+   Starting with version 0.96 gtkpod is using the gpod library.
+   libgpod is available as a standard package for major
+   Linux distributions. You can also install the library from source.
+   Download instructions for the tarball or development snapshot can
+   be found at http://www.gtkpod.org/libgpod.html
+
+   The following packages are required for building gtkpod:
+
+        autoconf (at least 2.55)
+        flex (or lex)
+        gettext
+        glib
+        gtk+ (gtk2 for the 2.0.x stream / gtk3 for the 2.1.0+ stream)
+        libgpod (at least 0.6.1)
+ 				libgdl
+				anjuta
+        libid3tag (at least 0.15)
+        libgnome-vfs-2.0 > 2.6 (for iPod autodetection under GNOME)
+
+   Optional Packages
+
+        For web browser plugin:
+        webkitgtk (version 1 or 3 depending on version of gtk)
+
+        For audio player plugin:
+        gstreamer
+        gstreamer-base
+        gstreamer-plugins-base
+        gstreamer-interfaces
+        gstreamer-plugins (plugins to support mp3 / mp4 playback)
+        gstreamer-pbutils
+
+        For filetype conversion:
+        flac
+        libogg
+        libvorbis
+        lame
+        faad2
+
+        For opengl coverart display (clarity) plugin:
+        clutter-gtk
+
+        For download of coverart:
+        libcurl
+
+        For sjcd (sound-juicer) plugin:
+        libgnome-media-profiles
+        libbrasero-media3
+        musicbrainz5
+
+   The following can be used for installing the dependencies on ubuntu 11.10:
+
+	      apt-get groupinstall Development\ Tools
+
+				apt-get install \
+				   libwebkitgtk-3.0-dev \
+				   gstreamer0.10-plugins-base \
+				   gstreamer0.10-plugins-good \
+				   libgstreamer-plugins-base0.10-dev \
+				   libgstreamer0.10-dev \
+				   gstreamer0.10-plugins-bad-multiverse \
+				   gstreamer0.10-ffmpeg \
+				   gstreamer0.10-plugins-bad \
+				   gstreamer0.10-plugins-ugly \
+				   libflac-dev \
+				   libogg-dev \
+				   libvorbis-dev \
+				   libmp3lame-dev \
+				   libclutter-gtk-1.0-dev \
+				   libgpod-dev \
+				   libanjuta-dev \
+				   libgdl-3-dev \
+				   libid3tag0-dev
+				   faad \
+				   libcurl3 \
+					 libbrasero-media3-dev \
+					 libmusicbrainz5-dev
+
+   The following can be used for installing the dependencies on fedora 19:
+
+        yum groupinstall Development\ Tools
+
+        yum install \
+            intltool \
+            flex \
+            gcc-c++ \
+            webkitgtk3-devel \
+            gstreamer1-devel \
+            gstreamer1-plugins-bad-free-devel \
+            gstreamer1-plugins-base-devel \
+            gstreamer1-plugins-good \
+            flac-devel \
+            libogg-devel \
+            libvorbis-devel \
+            libogg-devel \
+            clutter-gtk-devel \
+            libgpod-devel \
+            anjuta-devel \
+            libgdl-devel \
+            libid3tag-devel \
+            curl-devel \
+						brasero-devel \
+            libdiscid-devel \
+            libgnome-media-profiles \
+            iso-codes-devel \
+            libmusicbrainz5-devel \
+            libdiscid-devel
+
+        # Enable rpmfusion
+        yum localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+                                      http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+        # Add questionable media software!
+        yum install lame lame-devel.i686 faad2
+
+2. If you install libraries to /usr/local/lib please don't forget to
+   add the path to LD_LIBRARY_PATH and PKG_CONFIG_PATH
+
+     LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+     PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig
+     export LD_LIBRARY_PATH
+     export PKG_CONFIG_PATH
+
+   You can add those lines to your ~/.bashrc or add it globally to
+   /etc/profile.
+
+   If you install packages from your Linux distribution, keep in mind
+   that you will need to install the "-dev" packages as well to be
+   able to compile.
+
+
+3. Run the gtkpod 'configure' script to set up the compile
+
+   ./configure
+
+   The standard options to 'configure' apply.  For a list of options:
+
+   ./configure --help
+
+
+4. Compile the gtkpod software:
+
+   make
+
+
+5. Install the gtkpod software (may require root privileges):
+
+   make install && ldconfig
+
+
+   Note: You can test gtkpod without installing it. Some features
+   (translation catalogues, icons, scripts) will be searched in the
+   directories set by the configure script which may contain older
+   versions or nothing at all:
+
+   src/gtkpod
+
+
+
+----------------------------------------------------------------------
+
+** Note that you do not need to accept the default (usually
+   /usr/local) install path when you compile and install the software.
+   You may choose to install the software in a different location.
+   For example, with libid3tag in a non-standard
+   location, outside the $PATH and the usual build environment, you
+   need to configure the build of gtkpod appropriately.  You need to
+   set a CFLAGS variable during the 'configure' that sets the -I and
+   -L flags correctly.
+
+   As a practical example, let's say the libid3tag software
+   was installed in $HOME/Applications/libid3tag, and you want to
+   install gtkpod into $HOME/Applications/gtkpod.  Do this instead:
+
+    CFLAGS="-I$HOME/Applications/libid3tag/include -L$HOME/Applications/libid3tag/lib" ./configure --prefix=$HOME/Applications/gtkpod ; make ; make install 
+
+------------------------------------------------------------------------
+
+Quick guide for older Ubuntu/Debian distros
+
+The following steps were necessary to install libgpod and gtkpod on a fairly virgin Ubuntu Hardy (LTS 8.04) installation.
+
+# required packages
+sudo apt-get install autoconf flex gettext libglib2.0-dev libgtk2.0-dev libglade2-dev libid3tag0-dev libxml-parser-perl pkg-config automake gcc git-core gtk-doc-tools
+
+# recommended packages
+sudo apt-get install libcurl4-dev libflac-dev libgnomevfs2-dev libhal-dev libvorbis-dev libwebkit-dev
+
+# checkout libgpod and gtkpod
+git clone git://gtkpod.git.sourceforge.net/gitroot/gtkpod/libgpod
+git clone git://gtkpod.git.sourceforge.net/gitroot/gtkpod/gtkpod
+
+# compile libgpod
+cd libgpod/
+./autogen.sh
+make
+sudo make install
+
+# compile gtkpod
+cd ../gtkpod/
+cd libgpod/
+./autogen.sh
+make
+sudo make install
+sudo ldconfig
+
+#start gtkpod
+gtkpod &

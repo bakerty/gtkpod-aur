@@ -1,0 +1,547 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>View and edit track details</title>
+<link rel="previous" href="adding-files-and-folders.html" title="Adding files and folders">
+<link rel="next" href="cover-art.html" title="Cover art">
+<link rel="top" href="gtkpod.html" title="The gtkpod Manual">
+<style type="text/css">
+
+html { height: 100%; }
+body {
+  margin: 0px; padding: 12px;
+  background-color: #f9f9f6;
+  min-height: 100%;
+  direction: ltr;
+}
+div, p, pre, blockquote { margin: 0; padding: 0; }
+p img { vertical-align: middle; }
+sub { font-size: 0.83em; }
+sub sub { font-size: 1em; }
+sup { font-size: 0.83em; }
+sup sup { font-size: 1em; }
+table { border-collapse: collapse; }
+table.table-pgwide { width: 100%; }
+td { vertical-align: top; }
+td { padding: 0.2em 0.83em 0.2em 0.83em; }
+th { padding: 0 0.83em 0 0.83em; }
+tr.tr-shade {
+  background-color: #f9f9f6;
+}
+td.td-colsep { border-right: solid 1px; }
+td.td-rowsep { border-bottom: solid 1px; }
+thead { border-top: solid 2px; border-bottom: solid 2px; }
+tfoot { border-top: solid 2px; border-bottom: solid 2px; }
+div.body {
+  padding: 1em;
+  max-width: 60em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.body-sidebar {
+  margin-right: 13em;
+}
+div.division div.division { margin-top: 1.72em; }
+div.division div.division div.division { margin-top: 1.44em; }
+div.header {
+  margin: 0;
+  color: #3f3f3f;
+  border-bottom: solid 1px #e0e0df;
+}
+h1, h2, h3, h4, h5, h6, h7 {
+  margin: 0; padding: 0;
+  color: #3f3f3f;
+}
+h1.title { font-size: 1.72em; }
+h2.title { font-size: 1.44em; }
+h3.title { font-size: 1.2em; }
+h4.title, h5.title, h6.title, h7.title { font-size: 1em; }
+.block { margin-top: 1em; }
+.block .block-first { margin-top: 0; }
+.block-indent {
+  margin-left left: 1.72em;
+  margin-: 1em;
+}
+.block-indent .block-indent { margin-left: 0em; margin-right: 0em; }
+td .block-indent  { margin-left: 0em; margin-right: 0em; }
+dd .block-indent  { margin-left: 0em; margin-right: 0em; }
+.block-verbatim { white-space: pre; }
+div.title {
+  margin-bottom: 0.2em;
+  font-weight: bold;
+  color: #3f3f3f;
+}
+div.title-formal { padding-left: 0.2em; padding-right: 0.2em; }
+div.title-formal .label { font-weight: normal; }
+a {
+  color: #1f609f;
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+a:visited { color: #9f1f6f; }
+ul, ol, dl { margin: 0; padding: 0; }
+li {
+  margin-top: 1em;
+  margin-left: 2.4em;
+  padding: 0;
+}
+li.li-first { margin-top: 0; }
+dt { margin: 1em 0 0 0; }
+dt.dt-first { margin: 0; }
+dd {
+  margin-left: 1.72em;
+  margin-top: 0.5em;
+}
+dl.dl-compact dt { margin-top: 0; }
+dl.dl-compact dd { margin-top: 0; margin-bottom: 0; }
+
+
+ul.linktrail {
+  display: block;
+  margin: 0.2em 0 0 0;
+  text-align: right;
+}
+li.linktrail { display: inline; margin: 0; padding: 0; }
+
+li.linktrail::before {
+  content: '  /  ';
+  color: #3f3f3f;
+}
+
+li.linktrail-first::before, li.linktrail-only::before { content: ''; }
+
+
+div.navbar {
+  padding: 0.5em 1em 0.5em 1em;
+  max-width: 60em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.navbar-top { margin-bottom: 1em; }
+div.navbar-bottom { margin-top: 1em; clear: both; }
+div.navbar img { border: 0; vertical-align: -0.4em; }
+table.navbar { width: 100%; margin: 0; border: none; }
+table.navbar td { padding: 0; border: none; }
+td.navbar-next {
+  text-align: right;
+}
+a.navbar-prev::before {
+  
+  content: '◀  ';
+  color: #3f3f3f;
+}
+a.navbar-next::after {
+  
+  content: '  ▶';
+  color: #3f3f3f;
+}
+
+
+div.sidebar {
+  float: right;
+  padding: 0; margin: 0; width: 12em;
+}
+div.sidenav {
+  padding: 0.5em 1em 0 1em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.sidenav div.autotoc {
+  background-color: #ffffff;
+  border: none; padding: 0; margin: 0;
+}
+div.sidenav div.autotoc div.autotoc { margin-top: 0.5em; }
+div.sidenav div.autotoc li { margin-bottom: 0.5em; }
+div.sidenav div.autotoc div.autotoc div.autotoc {
+  margin-left: 1em;
+  margin-top: 0;
+}
+div.sidenav div.autotoc div.autotoc div.autotoc li { margin-bottom: 0; }
+
+
+div.autotoc {
+  
+  display: table;
+  margin-top: 1em;
+  margin-left: 1.72em;
+  padding: 0.5em 1em 0.5em 1em;
+  background-color: #f0f9ff;
+  border: solid 1px #c0c9ff;
+}
+div.autotoc ul { margin: 0; padding: 0; }
+div.autotoc li { list-style-type: none; margin: 0; }
+div.autotoc div.autotoc-title { margin-bottom: 0.5em; }
+div.autotoc div.autotoc { border: none; padding: 0; margin-top: 0; margin-bottom: 0.5em; }
+div.autotoc div.autotoc div.autotoc { margin-bottom: 0; }
+
+
+span.bibliolabel {
+  color: #3f3f3f;
+}
+
+
+div.admonition {
+  padding: 0.5em 6px 0.5em 6px;
+  border: solid 1px #e0e0df;
+  background-color: #fffff0;
+}
+div.caution-inner, div.important-inner, div.note-inner, div.tip-inner, div.warning-inner {
+  padding-left: 60px;
+  background-position: left top;
+  background-repeat: no-repeat;
+  min-height: 48px;
+}
+div.caution-inner { background-image: url("admon-caution.png"); }
+div.important-inner { background-image: url("admon-important.png"); }
+div.note-inner { background-image: url("admon-note.png"); }
+div.note-bug div.note-inner { background-image: url("admon-bug.png"); }
+div.tip-inner { background-image: url("admon-tip.png"); }
+div.warning-inner { background-image: url("admon-warning.png"); }
+div.blockquote {
+  
+  background-image: url('watermark-blockquote-201C.png');
+  background-repeat: no-repeat;
+  background-position: top left;
+  padding: 0.5em;
+  padding-left: 4em;
+}
+div.attribution {
+  margin-top: 0.5em;
+  color: #3f3f3f;
+}
+div.attribution::before {
+  
+  content: '― ';
+}
+div.epigraph {
+  text-align: right;
+  margin-left: 20%;
+  margin-right: 0;
+  color: #3f3f3f;
+}
+div.figure, div.informalfigure {
+  
+  display: table;
+  padding: 0.5em;
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.figure-inner, div.informalfigure-inner {
+  padding: 0.5em;
+  background-color: #ffffff;
+  border: solid 1px #e0e0df;
+}
+div.caption { margin-top: 0.5em; }
+div.programlisting {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.screen {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border: solid 1px #e0e0df;
+}
+div.screen .prompt {
+  color: #3f3f3f;
+}
+div.screen .userinput {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+div.programlisting .userinput {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+pre.linenumbering {
+  color: #3f3f3f;
+  margin: 0;
+  padding-right: 1em;
+  float: left;
+  text-align: right;
+}
+
+
+
+dl.index dt { margin-top: 0; }
+dl.index dd { margin-top: 0; margin-bottom: 0; }
+dl.indexdiv dt { margin-top: 0; }
+dl.indexdiv dd { margin-top: 0; margin-bottom: 0; }
+dl.setindex dt { margin-top: 0; }
+dl.setindex dd { margin-top: 0; margin-bottom: 0; }
+div.list div.title-formal span.title {
+  border-bottom: solid 1px #e0e0df;
+}
+div.simplelist {
+  margin-left: 1.72em;
+}
+div.simplelist table { margin-left: 0; border: none; }
+div.simplelist td {
+  padding: 0.5em;
+  border-left: solid 1px #e0e0df;
+}
+div.simplelist td.td-first {
+  padding-left: 0;
+  border-left: 0;
+}
+div.synopsis {
+  padding: 0.5em;
+  
+  background-color: #f9f9f6;
+  border-top: solid 2px #c0c9ff;
+  border-bottom: solid 2px #c0c9ff;
+}
+div.synopsis div.synopsis {
+  padding: 0;
+  border: none;
+}
+div.synopsis div.block { margin-top: 0.2em; }
+div.synopsis div.block-first { margin-top: 0; }
+div.cmdsynopsis { font-family: monospace; }
+
+span.accel { text-decoration: underline; }
+span.acronym { font-family: sans-serif; }
+span.application { font-style: italic; }
+span.classname, span.exceptionname, span.interfacename { font-family: monospace; }
+span.code {
+  font-family: monospace;
+  border: solid 1px #e0e0df;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+pre span.code { border: none; padding: 0; }
+span.command {
+  font-family: monospace;
+  border: solid 1px #e0e0df;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+pre span.command { border: none; padding: 0; }
+span.computeroutput { font-family: monospace; }
+
+span.constant { font-family: monospace; }
+span.database { font-family: monospace; }
+span.email { font-family: monospace; }
+span.emphasis { font-style: italic; }
+span.emphasis-bold { font-style: normal; font-weight: bold; }
+span.envar { font-family: monospace; }
+
+span.filename { font-family: monospace; }
+span.firstterm { font-style: italic; }
+span.foreignphrase { font-style: italic; }
+span.function { font-family: monospace; }
+
+dt.glossterm span.glossterm { font-style: normal; }
+
+
+span.glossterm { font-style: italic; }
+
+span.guibutton, span.guilabel, span.guimenu, span.guimenuitem, span.guisubmenu, span.interface {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+span.keycap {
+  font-weight: bold;
+  color: #3f3f3f;
+}
+span.lineannotation { font-style: italic; }
+span.literal { font-family: monospace; }
+span.markup  { font-family: monospace; }
+span.medialabel { font-style: italic; }
+span.methodname { font-family: monospace; }
+span.ooclass, span.ooexception, span.oointerface { font-family: monospace; }
+span.option { font-family: monospace; }
+span.package { font-family: monospace; }
+span.parameter { font-family: monospace; }
+span.paramdef span.parameter { font-style: italic; }
+span.prompt { font-family: monospace; }
+span.property { font-family: monospace; }
+span.replaceable  { font-style: italic; }
+span.returnvalue { font-family: monospace; }
+span.sgmltag { font-family: monospace; }
+span.structfield, span.structname { font-family: monospace; }
+span.symbol { font-family: monospace; }
+span.systemitem { font-family: monospace; }
+span.token { font-family: monospace; }
+span.type { font-family: monospace; }
+span.uri { font-family: monospace; }
+span.userinput { font-family: monospace; }
+span.varname { font-family: monospace; }
+span.wordasword { font-style: italic; }
+
+
+
+div.footnotes { font-style: italic; font-size: 0.8em; }
+div.footnote { margin-top: 1.44em; }
+span.footnote-number { display: inline; padding-right: 0.83em; }
+span.footnote-number + p { display: inline; }
+a.footnote { text-decoration: none; font-size: 0.8em; }
+a.footnote-ref { text-decoration: none; }
+
+span.co {
+  margin-left: 0.2em; margin-right: 0.2em;
+  padding-left: 0.4em; padding-right: 0.4em;
+  border: solid 1px #000000;
+  -moz-border-radius: 8px;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-size: 8px;
+}
+span.co:hover {
+  border-color: #333333;
+  background-color: #333333;
+  color: #FFFFFF;
+}
+span.co a { text-decoration: none; }
+span.co a:hover { text-decoration: none; }
+
+dt.question { margin-left: 0em; }
+dt.question div.label { float: left; }
+dd + dt.question { margin-top: 1em; }
+dd.answer {
+  margin-top: 1em;
+  margin-left: 2em;
+  margin-right: 1em;
+}
+dd.answer div.label { float: left; }
+</style>
+</head>
+<body>
+<div class="navbar navbar-top"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="adding-files-and-folders.html" title="Adding files and folders">Adding files and folders</a></td>
+<td class="navbar-next"><a class="navbar-next" href="cover-art.html" title="Cover art">Cover art</a></td>
+</tr></table></div>
+<div class="sidebar"><div class="sidenav"><div class="autotoc"><ul>
+<li><a href="gtkpod-info.html" title="About This Document">About This Document</a></li>
+<li>
+<a class="xref" href="gtkpod.html" title="The gtkpod Manual">The gtkpod Manual</a><div class="autotoc"><ul>
+<li><a class="xref" href="getting-started.html" title="Getting started">Getting started</a></li>
+<li>
+<a class="xref" href="ipod-and-content.html" title="iPod and content">iPod and content</a><div class="autotoc"><ul>
+<li><a class="xref" href="layout-of-gtkpod.html" title="Layout of gtkpod">Layout of gtkpod</a></li>
+<li><a class="xref" href="adding-files-and-folders.html" title="Adding files and folders">Adding files and folders</a></li>
+<li>View and edit track details</li>
+<li><a class="xref" href="cover-art.html" title="Cover art">Cover art</a></li>
+<li><a class="xref" href="adding-cover-art-from-a-browser.html" title="Adding cover art from a browser">Adding cover art from a browser</a></li>
+<li><a class="xref" href="copying-content-to-the-ipod.html" title="Copying content to the iPod">Copying content to the iPod</a></li>
+<li><a class="xref" href="playcounts-and-ratings.html" title="Playcounts and ratings">Playcounts and ratings</a></li>
+</ul></div>
+</li>
+<li><a class="xref" href="managing-playlists.html" title="Managing playlists">Managing playlists</a></li>
+<li><a class="xref" href="advanced-features.html" title="Advanced features">Advanced features</a></li>
+</ul></div>
+</li>
+</ul></div></div></div>
+<div class="body body-sidebar"><div class="division sect1">
+<a name="view-and-edit-track-details"></a><div class="header"><h1 class="sect1 title"><span class="title">View and edit track details</span></h1></div>
+<ul class="linktrail">
+<li class="linktrail linktrail-first"><a class="linktrail" href="gtkpod.html" title="The gtkpod Manual">The gtkpod Manual</a></li>
+<li class="linktrail linktrail-last"><a class="linktrail" href="ipod-and-content.html" title="iPod and content">iPod and content</a></li>
+</ul>
+<div class="autotoc"><ul>
+<li>
+<span class="label">2.3.1. </span><a class="xref" href="view-and-edit-track-details.html#edit-track-details" title="Edit Track Details">Edit Track Details</a>
+</li>
+<li>
+<span class="label">2.3.2. </span><a class="xref" href="view-and-edit-track-details.html#refresh-op-update-cp-track-info-from-file" title="Refresh (Update) Track Info From File">Refresh (Update) Track Info From File</a>
+</li>
+<li>
+<span class="label">2.3.3. </span><a class="xref" href="view-and-edit-track-details.html#synchronize-with-directories" title="Synchronize with Directories">Synchronize with Directories</a>
+</li>
+<li>
+<span class="label">2.3.4. </span><a class="xref" href="view-and-edit-track-details.html#volume-normalization" title="Volume Normalization">Volume Normalization</a>
+</li>
+</ul></div>
+<div class="division sect2">
+<a name="edit-track-details"></a><div class="header"><h2 class="sect2 title"><span class="title"><a name="edit-track-details-title"></a><span class="label">2.3.1. </span>Edit Track Details</span></h2></div>
+<p class="para block block-first">The Edit Track Details window can be displayed from a couple places.</p>
+<div class="block list itemizedlist"><ul class="itemizedlist">
+<li class="li-first">
+                        <p class="para block block-first">Select a track from the Track window, right-click and select "Edit Track Details" from the popup.
+                        </p>
+                    </li>
+<li>
+                        <p class="para block block-first">Make a selection in any of the categories, eg. Album, Genre, and right-clicking "Edit Track Details will display the window and allow all tracks in that category to be edited.
+                        </p>
+                    </li>
+<li>
+                        <p class="para block block-first">Right-clicking "Edit Track Details" from the popup menu on the CoverArt Display displays the window , allowing all tracks belonging to the album to be edited.
+                        </p>
+                        <p class="para block">
+                            <div class=" block figure block-first block-indent">
+<div class="block block-first title title-formal"><span class="title"><span class="label"><span style="font-style: italic; ">Figure 2-3</span> </span>The Edit Track Details dialog</span></div>
+<div class="figure-inner">
+                                
+                                <div class="mediaobject"><img src="figures/edit-track-details.png"></div>
+                            </div>
+</div>
+                        </p>
+                    </li>
+<li>
+                        <p class="para block block-first">The window allows multiple tracks to be edited at the same time. By selecting the "Change all Tracks Simulaneously" check box **BEFORE** making any edits, all the selected tracks can be updated with the new information.
+                        </p>
+                    </li>
+<li>
+                        <p class="para block block-first">The coverart can be dragged n dropped on from a web browser in the same way as the Cover Art Display. However, dropping a new cover onto this window will update the cover art of the tracks and not the album! This is an important distinction as it is possible to have different cover art for tracks in the same album! (why anyone would but its possible)!
+                        </p>
+                    </li>
+</ul></div>
+</div>
+<div class="division sect2">
+<a name="refresh-op-update-cp-track-info-from-file"></a><div class="header"><h2 class="sect2 title"><span class="title"><a name="refresh-op-update-cp-track-info-from-file-title"></a><span class="label">2.3.2. </span>Refresh (Update) Track Info From File</span></h2></div>
+<p class="para block block-first">
+                    If you have changed the ID3 tags of your original file, you can update the ID3 tags stored in gtkpod without removing and re-adding the track. Simply select the track to be updated and press "Ctrl-u" or choose "Update Track Info From File" from the Edit menu. Since gtkpod needs to know the filename of the track, the "Extended Information File" (see <a class="link" href="setting-ipod-properties.html#extended-information-file" title="Extended Information File">here</a>) is needed.
+                </p>
+<p class="para block">"Update" will also re-read the replay-gain tags from disk, if available, and set the soundcheck field. If no replay-gain tag is available, the soundcheck field will be erased. You can also select entries in the filter tab or entire playlists for refresh.
+                </p>
+</div>
+<div class="division sect2">
+<a name="synchronize-with-directories"></a><div class="header"><h2 class="sect2 title"><span class="title"><a name="synchronize-with-directories-title"></a><span class="label">2.3.3. </span>Synchronize with Directories</span></h2></div>
+<p class="para block block-first">If you have added files to directories or changed files in directories you have previously added tracks from, you can use the "Synchronize Dirs" utility to update your iTunesDB.
+                </p>
+<p class="para block">"Synchronize with Dir(s)" will use the selected tracks to make a list of directories to update, so you should activate the "Write Extended Information" option in the export section of the Preferences dialogue.
+                </p>
+<p class="para block">It will then add all non-existing tracks in those directories and update all existing tracks. The tracks are also added to the currently selected playlist, if they aren't already a member.
+                </p>
+<p class="para block">Tracks that have been removed from the directory will only be removed from the iTunesDB if this option is checked in the option dialogue.
+                </p>
+<p class="para block">For best results you should also activate duplicate detection. This avoids unnecessary copying of unchanged tracks.
+                </p>
+</div>
+<div class="division sect2">
+<a name="volume-normalization"></a><div class="header"><h2 class="sect2 title"><span class="title"><a name="volume-normalization-title"></a><span class="label">2.3.4. </span>Volume Normalization</span></h2></div>
+<p class="para block block-first">There are two fields in the iTunes Database (iTunesDB) that allow for the adjustment of the volume of an individual track:</p>
+<div class="block list itemizedlist"><ul class="itemizedlist">
+<li class="li-first">
+                        <span class="para">the volume field (a signed integer)</span>
+                    </li>
+<li>
+                        <span class="para">the soundcheck field (in dB).
+                        </span>
+                    </li>
+</ul></div>
+<p class="para block">
+                    The volume is always active, whereas the soundcheck field is only active when you select 'soundcheck' on the iPod. Further, the soundcheck field only affects the earphone output but not the line output of the iPod. 
+                </p>
+<p class="para block">
+                    gtkpod will set the soundcheck according to the replay-gain tag set in your mp3 file. Newer versions of 'lame' automatically include the replay-gain tag when encoding. In that case the soundcheck field will be filled in when you first import a track. 
+                </p>
+<p class="para block">If no replay-gain tag is set, you can use the function 'Normalize Volume' to call mp3gain (mp3gain.sourceforge.net) to calculate the gain and write a replay-gain tag. Since this procedure is very time consuming, it is not done automatically during import. You need to install mp3gain in the default path or set the full path in the 'Tools' section of the preferences dialog. If the iPod is connected, the tag is written to the file stored on the iPod.
+                </p>
+<p class="para block">At this time "album gain" functionality is not supported. "Album gain" means that the volume of all tracks of one album is adjusted by the same gain, such that the relative volume level remains the same. It is planned to realize this in one of the next versions.
+                </p>
+<p class="para block">Also, please be aware that tracks are not normalized on a 'per playlist' fashion. If a track is normalized, it's normalized in all playlists it is a member of.
+                </p>
+<p class="para block">Once the replay-gain tag has been read, it is stored in the extended information file 'iTunesDB.ext'. When you call 'Normalize volume' again, the stored value will be used to re-populate the soundcheck field. Use 'Update Track' to re-read the tag from the file.
+                </p>
+</div>
+</div></div>
+<div class="navbar navbar-bottom"><table class="navbar"><tr>
+<td class="navbar-prev"><a class="navbar-prev" href="adding-files-and-folders.html" title="Adding files and folders">Adding files and folders</a></td>
+<td class="navbar-next"><a class="navbar-next" href="cover-art.html" title="Cover art">Cover art</a></td>
+</tr></table></div>
+</body>
+</html>

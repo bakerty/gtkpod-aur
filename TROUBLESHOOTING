@@ -1,0 +1,245 @@
+Troubleshooting-FAQ:
+
+
+Contents:
+
+- Installed libmp4v2 or libgpod from source to /usr/local/lib, but
+  gtkpod is unable to locate libmp4.so.0 or libgpod.so.0
+
+- Files copied to gtkpod but they don't appear in the database (0.80,
+  Tony Williams)
+
+- Filenames on the iPod appear in DOS 8.3 format and syncing to the iPod
+  is not working as expected.
+
+- ./autogen.sh does not work
+
+- The following error message is displayed when accessing the device
+  (Markus Gaugusch, Justin Thiessen):
+     ieee1394: sbp2: aborting sbp2 command
+     Test Unit Ready 00 00 00 00 00
+
+- The following error message is displayed when accessing the device
+  (Ingo Reimann)
+     usb-storage: Attempting to get CSW...
+     usb-storage: usb_stor_bulk_transfer_buf: xfer 13 bytes
+     usb-storage: Status code -75; transferred 0/13
+
+- When connecting an iPod via USB to a 2.6 kernel machine the iPod will
+  be recognized but not work correctly. In /var/log/messages you'll
+  see the a bunch of "Buffer I/O error on device sd?" when connecting
+  the iPod (Jonas Bergler, Kevin Venkiteswaran)
+
+- SHUFFLE won't play music after reformatting (Mark Davis)
+
+- Calendar entries mixed up
+
+- m4a files created by faac cannot be added by gtkpod (gentoo)
+
+- gtkpod crashes when reading the iTunesDB (Fedora)
+
+- Problems connecting the iPod to Solaris/SPARC
+
+----------------------------------------------------------------------
+
+Installed libmp4v2 or libgpod from source to /usr/local/lib, but
+gtkpod is unable to locate libmp4.so.0 or libgpod.so.0
+
+
+If you install to /usr/local/lib please don't forget to add the path
+to LD_LIBRARY_PATH:
+
+     LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+     export LD_LIBRARY_PATH
+
+You can add those lines to your ~/.bashrc or add it globally to
+/etc/profile.
+
+----------------------------------------------------------------------
+Files copied to gtkpod but they don't appear in the database (0.80,
+Tony Williams)
+
+I'm having a problem that I wonder if you've seen.  I've setup
+gtkpod.  launch it and add files.  I can hear the ipod harddrive
+spin up.  If I go onto the ipod directly I can see the space being
+used and can even see the new files on the ipod.  However the ipod
+interface doesn't show the new files and gtkpod keeps telling me
+that there are orphaned files.
+
+Solution:
+
+I finally figured out the problem.  In my fstab I had the filesystem
+set to 'auto' and it was mounting as msdos instead of vfat.  I
+specified vfat in fstab and voila!  I'm a happy happy man.
+
+
+----------------------------------------------------------------------
+Filenames on the iPod appear in DOS 8.3 format and syncing to the iPod
+is not working as expected.
+
+Solution:
+
+You need to specify "vfat" as file system type. How to do that depends
+on which way you use to mount the iPod -- see the README file for more
+details.
+
+----------------------------------------------------------------------
+./autogen.sh does not work
+
+A ubunto user has reported that he had to set
+
+ACLOCAL_FLAGS=" -I /usr/share/aclocal/"
+
+in order to get ./autogen.sh to work.
+
+----------------------------------------------------------------------
+The following error message is displayed when accessing the device:
+
+     ieee1394: sbp2: aborting sbp2 command
+     Test Unit Ready 00 00 00 00 00
+
+Solution:
+
+(Markus Gaugusch):
+It is possible that hotplug and the "sg" support are not working well
+together. Try disabling "sg" support in the kernel configuration or
+unload the "sg" module if you are using modules.
+
+(Justin Thiessen):
+Forcing the sbp2 module to serialized I/O seems (so far) to have
+solved the problem.
+
+Ref.:
+------
+http://www.netzwerk-aktiv.com/pub/doc/newsletters/linux1394-user/html/1676.html
+http://www.ubuntuforums.org/printthread.php?t=6678
+http://66.102.7.104/search?q=cache:Xh_gu43y6w8J:themikecam.com/newmikecam/blog/index.php/geek/2005/+ipod+serialize_io&hl=en
+
+Looks like the driver is going to be set to default to serialized I/O
+in kernel 2.6.14, anyways.
+
+http://linuxtoday.com/developer/2005093001026NWKNDV
+
+
+----------------------------------------------------------------------
+The following error message is displayed when accessing the device
+
+     usb-storage: Attempting to get CSW...
+     usb-storage: usb_stor_bulk_transfer_buf: xfer 13 bytes
+     usb-storage: Status code -75; transferred 0/13
+
+Solution (by Ingo Reimann):
+
+I tried to use an iPod Mini with my nforce2-Board, kernel
+2.6.14/2.6.15 debian sid and got messages like [above] in
+dmesg. /dev/sda appeared, but fdisk -l did not show anything
+
+The solution, that i found in a discussion on
+http://kerneltrap.org/node/3844 was to unload ehci_hcd.
+
+
+----------------------------------------------------------------------
+When connecting an iPod via USB to a 2.6 kernel machine the iPod will
+be recognized but not work correctly. In /var/log/messages you'll see
+the a bunch of "Buffer I/O error on device sd?" when connecting the
+iPod (Jonas Bergler, Kevin Venkiteswaran)
+
+Solution (by "jeffmock"):
+
+Disable CONFIG_EFI_PARTITION (File Systems -> Partition Types ->
+Advanced Partition Selection -> EFI GUID Partition support) in your
+kernel configuration, recompile.
+
+Details can be found at 
+http://www.linuxquestions.org/questions/showthread.php?postid=1197015#post1197015
+
+Excerpt:
+
+"This problem could potentially happen with both 2.4 and 2.6 kernels.
+
+A longer story follows and perhaps someone can come up with a more
+sensible solution for the long run.
+
+The iPod looks like a removable disk drive to the host computer. When it
+is attached to the computer, the mini iPod reports a capacity of 7999488
+512-byte sectors (or about 4GB). This turns out to be wrong for whatever
+reason. The mini iPod only really has 7999376 sectors and it exaggerates
+by 112 sectors. The other quality of the iPod is that if the computer
+attempts to read a sector greater than the actual capacity but less than
+the reported capacity, the iPod will dutifully report an I/O error, but
+it won't respond to any future requests until you unplug/plug the iPod."
+
+I followed the kernel recompile instructions for distro, disabled only
+the CONFIG_EFI_PARTITION option, and things ran perfectly for me
+afterwards. As indicated above, hopefully a better long-term solution
+will emerge soon."
+
+(Jorg Schuler: it seems a patch was introduced in kernel version 2.6.10:
+"<phil@ipom.com> [PATCH] USB Storage: Add unusual_devs entry for iPod
+This patch adds an unusual_devs.h entry for the Apple iPod as it
+reports one too many sectors. The patch was submitted by
+Avi Kivity <avi@argo.co.il> and re-diffed by me.")
+
+
+----------------------------------------------------------------------
+SHUFFLE won't play music after reformatting
+
+Solution (by Mark Davis):
+
+The SHUFFLE seems to care about the volume name which has to be
+"IPOD". Try to format as (replace /dev/sda1 with the appropriate
+device file for your SHUFFLE!):
+
+mkdosfs -F32 -n IPOD /dev/sda1
+
+
+----------------------------------------------------------------------
+Calendar entries mixed up
+
+The iPod does not appear to like times specified in UTC (indicated by
+a trailing 'Z'). KOrganizer seems to do this. If you know how to work
+around it let me know.
+
+
+----------------------------------------------------------------------
+m4a files created by faac cannot be added by gtkpod (gentoo)
+
+There appear to be some versions of faac that do not create 'good' m4a
+files. The problem could be solved under gentoo by using version 1.24.
+In order to make error tracking easier, more detailled error messages
+are displayed when tracks could not be added for any reason starting
+with version 0.91-CVS of gtkpod.
+
+
+----------------------------------------------------------------------
+gtkpod crashes when reading the iTunesDB (Fedora)
+
+It appears that crashes were observed with kernel version
+2.6.11-1.35_FC3. An upgrade to 2.6.12-1.1376_FC3 got rid of the
+problem. This was with gtkpod-0.94.0 and Athlon64 3000+. 
+
+
+----------------------------------------------------------------------
+Problems connecting the iPod to Solaris/SPARC
+
+Current (as of 2006/03/30) versions of the Solaris pcfs SPARC driver
+have a bug where the correct filesystem/partition layout may not be
+recognized, and this is true for iPods.  This prevents the iPod
+partition from being mounted on Solaris SPARC.  In order to work
+around this, one must prevent pcfs from detecting the first FAT32
+filesystem, forcing it to move on to the second one.  This can be done
+by changing the filesystem identifier like so:
+
+# dd if=/dev/rdsk/c3t0d0s2 of=/tmp/ipod.orig count=1
+# cp /tmp/ipod.orig /tmp/ipod.modified
+<edit /tmp/ipod.modified and change the first occurance of "FAT32" (at
+offset 0x52 for me) to something else like "CAT32">
+# dd if=/tmp/ipod.modified of=/dev/rdsk/c3t0d0s2 count=1
+
+The above modification may or may not affect usage on other systems. 
+Some reports encounter no problems using the iPod or iTunes after
+making it.  In my own experience, my iPod hard locked moving from a
+SPARC system to an x86 system, and I had to undo the change.  Wrapper
+scripts to handle this may be desirable on SPARC.
+
+Eric Enright

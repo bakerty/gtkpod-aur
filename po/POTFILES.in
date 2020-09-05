@@ -1,0 +1,152 @@
+[encoding: UTF-8]
+
+[type: gettext/glade]data/glade/core-gtkpod.xml
+data/gtkpod.desktop.in
+libgtkpod/autodetection.c
+libgtkpod/charset.c
+libgtkpod/clientserver.c
+libgtkpod/context_menus.c
+libgtkpod/directories.c
+libgtkpod/file.c
+libgtkpod/file_convert.c
+libgtkpod/file_itunesdb.c
+libgtkpod/fileselection.c
+libgtkpod/filetype_iface.c
+libgtkpod/gp_itdb.c
+libgtkpod/gtkpod_app_iface.c
+libgtkpod/misc.c
+libgtkpod/misc_conversion.c
+libgtkpod/misc_playlist.c
+libgtkpod/misc_track.c
+libgtkpod/prefs.c
+libgtkpod/sha1.c
+libgtkpod/syncdir.c
+libgtkpod/tools.c
+libs/atomic-parsley/APar_sha1.cpp
+libs/atomic-parsley/AP_iconv.cpp
+libs/atomic-parsley/APar_uuid.cpp
+libs/atomic-parsley/AtomicParsleyBridge.cpp
+libs/atomic-parsley/AP_AtomExtracts.cpp
+libs/atomic-parsley/AtomicParsley.cpp
+libs/atomic-parsley/AP_commons.cpp
+libs/atomic-parsley/AtomicParsley_genres.cpp
+plugins/filetype_video/videofile.c
+plugins/core_preferences/core_prefs.c
+[type: gettext/ini]plugins/core_preferences/core_prefs.plugin.in
+[type: gettext/glade]plugins/core_preferences/core_prefs.xml
+plugins/core_preferences/plugin.c
+[type: gettext/glade]plugins/cover_display/cover_display.xml
+plugins/cover_display/cover_display_context_menu.c
+[type: gettext/ini]plugins/cover_display/cover_display.plugin.in
+plugins/cover_display/display_coverart.c
+plugins/cover_display/fetchcover.c
+plugins/cover_display/plugin.c
+plugins/coverweb/coverweb.c
+[type: gettext/glade]plugins/coverweb/coverweb.xml
+[type: gettext/ini]plugins/coverweb/coverweb.plugin.in
+plugins/coverweb/coverweb_preferences.c
+plugins/coverweb/plugin.c
+plugins/details_editor/details.c
+[type: gettext/glade]plugins/details_editor/details_editor.xml
+[type: gettext/ini]plugins/details_editor/details_editor.plugin.in
+plugins/details_editor/fetchcover.c
+plugins/details_editor/plugin.c
+[type: gettext/ini]plugins/exporter/exporter.plugin.in
+[type: gettext/glade]plugins/exporter/exporter.xml
+plugins/exporter/file_export.c
+plugins/exporter/plugin.c
+[type: gettext/ini]plugins/filetype_flac/filetype_flac.plugin.in
+plugins/filetype_flac/flacfile.c
+plugins/filetype_flac/plugin.c
+[type: gettext/ini]plugins/filetype_m4a/filetype_m4a.plugin.in
+plugins/filetype_m4a/m4afile.c
+plugins/filetype_m4a/plugin.c
+[type: gettext/ini]plugins/filetype_mp3/filetype_mp3.plugin.in
+plugins/filetype_mp3/mp3file.c
+plugins/filetype_mp3/plugin.c
+[type: gettext/ini]plugins/filetype_mp4/filetype_mp4.plugin.in
+plugins/filetype_mp4/mp4file.c
+plugins/filetype_mp4/plugin.c
+[type: gettext/ini]plugins/filetype_ogg/filetype_ogg.plugin.in
+plugins/filetype_ogg/oggfile.c
+plugins/filetype_ogg/plugin.c
+[type: gettext/ini]plugins/filetype_video/filetype_video.plugin.in
+plugins/filetype_video/plugin.c
+[type: gettext/ini]plugins/filetype_wav/filetype_wav.plugin.in
+plugins/filetype_wav/plugin.c
+plugins/filetype_wav/wavfile.c
+plugins/info_display/info.c
+[type: gettext/ini]plugins/info_display/info_display.plugin.in
+plugins/info_display/infoview.c
+plugins/info_display/plugin.c
+plugins/media_player/media_player.c
+[type: gettext/glade]plugins/media_player/media_player.xml
+[type: gettext/ini]plugins/media_player/media_player.plugin.in
+plugins/media_player/plugin.c
+plugins/mserv/mserv.c
+[type: gettext/ini]plugins/mserv/mserv.plugin.in
+[type: gettext/glade]plugins/mserv/mserv.xml
+plugins/mserv/plugin.c
+plugins/photo_editor/display_photo.c
+[type: gettext/glade]plugins/photo_editor/photo_editor.xml
+plugins/photo_editor/photo_editor_context_menu.c
+[type: gettext/ini]plugins/photo_editor/photo_editor.plugin.in
+plugins/photo_editor/plugin.c
+plugins/playlist_display/display_playlists.c
+[type: gettext/glade]plugins/playlist_display/playlist_display.xml
+plugins/playlist_display/playlist_display_actions.c
+plugins/playlist_display/playlist_display_spl.c
+plugins/playlist_display/playlist_display_context_menu.c
+[type: gettext/ini]plugins/playlist_display/playlist_display.plugin.in
+plugins/playlist_display/plugin.c
+plugins/repository_editor/plugin.c
+plugins/repository_editor/repository_actions.c
+plugins/repository_editor/repository_creator.c
+plugins/repository_editor/repository_editor.c
+[type: gettext/glade]plugins/repository_editor/repository_editor.xml
+[type: gettext/ini]plugins/repository_editor/repository_editor.plugin.in
+plugins/repository_editor/repository_init.c
+plugins/sorttab_display/date_parser.c
+plugins/sorttab_display/display_sorttabs.c
+plugins/sorttab_display/plugin.c
+[type: gettext/glade]plugins/sorttab_display/sorttab_display.xml
+plugins/sorttab_display/sorttab_display_actions.c
+plugins/sorttab_display/sorttab_display_context_menu.c
+plugins/sorttab_display/normal_sorttab_page.c
+plugins/sorttab_display/sorttab_widget.c
+plugins/sorttab_display/special_sorttab_page.c
+[type: gettext/ini]plugins/sorttab_display/sorttab_display.plugin.in
+plugins/track_display/display_tracks.c
+plugins/track_display/plugin.c
+[type: gettext/glade]plugins/track_display/track_display.xml
+plugins/track_display/track_display_context_menu.c
+[type: gettext/ini]plugins/track_display/track_display.plugin.in
+plugins/track_display/track_display_preferences.c
+[type: gettext/glade]plugins/clarity/clarity.xml
+[type: gettext/ini]plugins/clarity/clarity.plugin.in
+plugins/clarity/clarity_context_menu.c
+plugins/clarity/clarity_dnd_support.c
+plugins/clarity/fetchcover.c
+plugins/clarity/plugin.c
+plugins/external_player/plugin.c
+[type: gettext/glade]plugins/external_player/external_player.xml
+[type: gettext/ini]plugins/external_player/external_player.plugin.in
+plugins/external_player/plugin.c
+plugins/sjcd/egg-play-preview.c
+plugins/sjcd/libjuicer/sj-extractor.c
+plugins/sjcd/libjuicer/sj-metadata-getter.c
+plugins/sjcd/libjuicer/sj-metadata-gvfs.c
+plugins/sjcd/libjuicer/sj-metadata.c
+plugins/sjcd/libjuicer/sj-metadata-musicbrainz5.c
+plugins/sjcd/plugin.c
+plugins/sjcd/sj-extracting.c
+plugins/sjcd/sj-genres.c
+plugins/sjcd/sj-main.c
+plugins/sjcd/sj-prefs.c
+[type: gettext/glade]plugins/sjcd/sjcd.xml
+src/anjuta-about.c
+src/anjuta-action-callbacks.c
+src/anjuta-actions.h
+src/anjuta-window.c
+src/gtkpod.c
+src/main.c
