@@ -39,6 +39,7 @@ ffla |  This program is distributed in the hope that it will be useful,
 #include <sys/wait.h>
 #include <unistd.h>
 #include <glib/gi18n-lib.h>
+#include <libxml/parser.h>
 #include "charset.h"
 #include "clientserver.h"
 #include "misc.h"
