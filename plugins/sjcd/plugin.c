@@ -43,6 +43,8 @@
 #define PREFERENCE_ICON_STOCK_ID "sjcd-preference-icon"
 #define TAB_NAME _("Sound Juicer")
 
+SJCDPlugin *sjcd_plugin;
+
 /* Parent class. Part of standard class definition */
 static gpointer parent_class;
 

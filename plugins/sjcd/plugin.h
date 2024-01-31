@@ -59,7 +59,7 @@ struct _SJCDPluginClass {
     AnjutaPluginClass parent_class;
 };
 
-SJCDPlugin *sjcd_plugin;
+extern SJCDPlugin *sjcd_plugin;
 
 gchar* sjcd_plugin_get_builder_file();
 
